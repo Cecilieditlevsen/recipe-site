@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { findRecipe } from "../../data/recipes";
-import { cn } from "../../components/recipe";
-import Image from "next/image";
-import { useState } from "react";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { findRecipe } from '../../data/recipes'
+import { cn } from '../../components/recipe'
+import Image from 'next/image'
+import { useState } from 'react'
 
 const Recipe = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-  const { id } = router.query;
+  const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
+  const { id } = router.query
 
-  const recipe = findRecipe(id as string);
+  const recipe = findRecipe(id as string)
 
   return (
     <>
@@ -28,16 +28,16 @@ const Recipe = () => {
         <div className="max-w-screen-xl mx-auto aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-6 xl:aspect-h-2">
           {recipe?.image ? (
             <Image
-              layout={"fill"}
+              layout={'fill'}
               src={recipe.image}
               objectFit="cover"
-              objectPosition={"center"}
+              objectPosition={'center'}
               alt=""
               className={cn(
-                "group-hover:opacity-75 duration-700 ease-in-out",
+                'group-hover:opacity-75 duration-700 ease-in-out',
                 isLoading
-                  ? "grayscale blur-2xl scale-110"
-                  : "grayscale-0 blur-0 scale-100"
+                  ? 'grayscale blur-2xl scale-110'
+                  : 'grayscale-0 blur-0 scale-100'
               )}
               onLoadingComplete={() => setIsLoading(false)}
             />
@@ -79,7 +79,7 @@ const Recipe = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Recipe;
+export default Recipe
