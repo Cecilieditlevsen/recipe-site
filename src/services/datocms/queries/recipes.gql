@@ -1,0 +1,32 @@
+query GetAllRecipes {
+  allRecipes {
+    excerpt
+    id
+    slug
+    featuredImage {
+      url
+    }
+    ingredients {
+      title
+      unit
+      quantity
+      id
+    }
+    title
+  }
+}
+
+query GetSingleRecipe($slug: String!) {
+  recipe(filter: { slug: { eq: $slug } }) {
+    title
+    slug
+    updatedAt
+    id
+    ingredients {
+      id
+      quantity
+      unit
+      title
+    }
+  }
+}

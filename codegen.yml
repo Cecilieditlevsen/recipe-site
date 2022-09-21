@@ -1,0 +1,24 @@
+overwrite: true
+schema:
+  - ${NEXT_PUBLIC_DATOCMS_GRAPHQL_URL}:
+      headers:
+        authorization: 'Bearer ${NEXT_PUBLIC_DATOCMS_ACCESS_TOKEN}'
+        content-type: 'application/json'
+        accept: 'application/json'
+documents: 'src/**/*.gql'
+hooks:
+  afterAllFileWrite:
+    - 'prettier --write'
+    - 'eslint --fix'
+generates:
+  src/services/datocms/generated.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-graphql-request'
+    config:
+      avoidOptionals: true
+      namingConvention: keep
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'

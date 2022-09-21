@@ -1,0 +1,19 @@
+
+
+{
+  "name": "Remote Schema",
+  "schemaPath": "remote-schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "DatoCMS Graphql Endpoint": {
+        "url": "${env:NEXT_PUBLIC_DATOCMS_GRAPHQL_URL}",
+        "headers": {
+          "authorization": "${env:NEXT_PUBLIC_DATOCMS_ACCESS_TOKEN}",
+          "content-type": "application/json",
+          "accept": "application/json"
+        },
+        "introspect": true
+      }
+    }
+  }
+}

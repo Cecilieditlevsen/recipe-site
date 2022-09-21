@@ -26,10 +26,10 @@ const Recipe = () => {
         </div>
 
         <div className="max-w-screen-xl mx-auto aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-6 xl:aspect-h-2">
-          {recipe?.image ? (
+          {recipe?.featuredImage ? (
             <Image
               layout={'fill'}
-              src={recipe.image}
+              src={recipe.featuredImage}
               objectFit="cover"
               objectPosition={'center'}
               alt=""
