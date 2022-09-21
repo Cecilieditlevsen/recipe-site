@@ -19,17 +19,14 @@ export const getStaticProps = async () => {
 const Recipes = ({
   recipes,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(recipes)
 
   return (
     <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
       <div className="grid gap-y-10 grid-cols-2 gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-        {recipes.map((recipe: any) => (
+        {recipes.map((recipe) => (
           <Recipe
             key={recipe.id}
-            id={recipe.id}
-            title={recipe.title}
-            image={recipe.featuredImage.url}
+            recipe={recipe}
           />
         ))}
       </div>

@@ -3,6 +3,7 @@ query GetAllRecipes {
     excerpt
     id
     slug
+    updatedAt
     featuredImage {
       url
     }
@@ -22,6 +23,9 @@ query GetSingleRecipe($slug: String!) {
     slug
     updatedAt
     id
+    featuredImage {
+      url
+    }
     ingredients {
       id
       quantity

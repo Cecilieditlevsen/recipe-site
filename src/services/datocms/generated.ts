@@ -2408,6 +2408,7 @@ export type GetAllRecipesQuery = {
     excerpt: string | null
     id: any
     slug: string | null
+    updatedAt: any
     title: string | null
     featuredImage: { __typename?: 'FileField'; url: string } | null
     ingredients: Array<{
@@ -2432,6 +2433,7 @@ export type GetSingleRecipeQuery = {
     slug: string | null
     updatedAt: any
     id: any
+    featuredImage: { __typename?: 'FileField'; url: string } | null
     ingredients: Array<{
       __typename?: 'IngredientBlockRecord'
       id: any
@@ -2448,6 +2450,7 @@ export const GetAllRecipesDocument = gql`
       excerpt
       id
       slug
+      updatedAt
       featuredImage {
         url
       }
@@ -2468,6 +2471,9 @@ export const GetSingleRecipeDocument = gql`
       slug
       updatedAt
       id
+      featuredImage {
+        url
+      }
       ingredients {
         id
         quantity

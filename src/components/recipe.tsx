@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import {GetSingleRecipeDocument, GetSingleRecipeQuery} from "@services/datocms/generated";
 
 export function cn(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -12,15 +13,15 @@ type Props = {
   id: string
 }
 
-const Recipe = ({ title, image, id }: Props) => {
+const Recipe = ({recipe}: GetSingleRecipeQuery) => {
   const [isLoading, setIsLoading] = useState(true)
 
   return (
-    <Link href={`/recipes/${id}`}>
+    <Link href={`/recipes/${recipe?.id}`}>
       <a className="group">
         <div className="aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8 w-full overflow-hidden rounded-lg bg-gray-200">
           <Image
-            src={image}
+            src={'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y2F0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60'}
             layout="fill"
             objectFit="cover"
             objectPosition={'center'}
@@ -34,7 +35,7 @@ const Recipe = ({ title, image, id }: Props) => {
             onLoadingComplete={() => setIsLoading(false)}
           />
         </div>
-        <h3 className="mt-4 text-sm text-gray-700">{title}</h3>
+        <h3 className="mt-4 text-sm text-gray-700">{recipe?.title}</h3>
       </a>
     </Link>
   )

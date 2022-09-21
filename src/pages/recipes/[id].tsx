@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { findRecipe } from '../../data/recipes'
-import { cn } from '../../components/recipe'
+import { findRecipe } from '@/data/recipes'
+import {cn} from '@/components/recipe';
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -15,7 +15,7 @@ const Recipe = () => {
   return (
     <>
       <div className="min-h-screen bg-amber-50">
-        <h1>
+        <h1>=
           <Link href="/">
             <a>Back</a>
           </Link>
