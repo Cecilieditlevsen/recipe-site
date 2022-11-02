@@ -13,3 +13,4 @@ const client = new GraphQLClient(env.DATOCMS_GRAPHQL_URL, {
 })
 
 export const datocmsClient = getSdk(client)
+
