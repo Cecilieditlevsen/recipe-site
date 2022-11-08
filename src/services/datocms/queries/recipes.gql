@@ -7,6 +7,9 @@ query GetAllRecipes {
     featuredImage {
       url
     }
+    description {
+      value
+    }
     ingredients {
       title
       unit
@@ -25,6 +28,9 @@ query GetSingleRecipe($slug: String!) {
     id
     featuredImage {
       url
+    }
+    description {
+      value
     }
     ingredients {
       id

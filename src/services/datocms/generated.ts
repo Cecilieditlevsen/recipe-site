@@ -2411,6 +2411,10 @@ export type GetAllRecipesQuery = {
     updatedAt: any
     title: string | null
     featuredImage: { __typename?: 'FileField'; url: string } | null
+    description: {
+      __typename?: 'RecipeModelDescriptionField'
+      value: any
+    } | null
     ingredients: Array<{
       __typename?: 'IngredientBlockRecord'
       title: string | null
@@ -2434,6 +2438,10 @@ export type GetSingleRecipeQuery = {
     updatedAt: any
     id: any
     featuredImage: { __typename?: 'FileField'; url: string } | null
+    description: {
+      __typename?: 'RecipeModelDescriptionField'
+      value: any
+    } | null
     ingredients: Array<{
       __typename?: 'IngredientBlockRecord'
       id: any
@@ -2454,6 +2462,9 @@ export const GetAllRecipesDocument = gql`
       featuredImage {
         url
       }
+      description {
+        value
+      }
       ingredients {
         title
         unit
@@ -2473,6 +2484,9 @@ export const GetSingleRecipeDocument = gql`
       id
       featuredImage {
         url
+      }
+      description {
+        value
       }
       ingredients {
         id

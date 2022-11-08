@@ -1,21 +1,45 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { findRecipe } from '@/data/recipes'
-import {cn} from '@/components/recipe';
+import { datocmsService } from '@services/datocms'
+import { cn } from '@components/recipe'
+import { InferGetStaticPropsType } from 'next'
+import { GetStaticPathsContext } from "next"
 import Image from 'next/image'
-import { useState } from 'react'
+import {useState} from "react";
 
-const Recipe = () => {
+export const getStaticPaths = async () => {
+  const recipes = await datocmsService.getAllRecipes()
+
+
+  const paths = recipes?.map((recipe) => {
+    return {
+      params: { id: recipe.slug.toString() },
+    }
+  })
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps = async (context: any) => {
+  const id = context.params.id
+
+  const data = await datocmsService.getSingleRecipe({ slug: id })
+
+  console.log(data)
+  return {
+    props: { recipe: data },
+  }
+}
+
+const Recipe = ({ recipe }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [isLoading, setIsLoading] = useState(true)
-  const router = useRouter()
-  const { id } = router.query
-
-  const recipe = findRecipe(id as string)
-
   return (
     <>
       <div className="min-h-screen bg-amber-50">
-        <h1>=
+        <h1>
+          =
           <Link href="/">
             <a>Back</a>
           </Link>
@@ -26,10 +50,10 @@ const Recipe = () => {
         </div>
 
         <div className="max-w-screen-xl mx-auto aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-6 xl:aspect-h-2">
-          {recipe?.featuredImage ? (
+          {recipe?.image ? (
             <Image
               layout={'fill'}
-              src={recipe.featuredImage}
+              src={recipe.image}
               objectFit="cover"
               objectPosition={'center'}
               alt=""
@@ -49,19 +73,17 @@ const Recipe = () => {
         <div className="w-100 flex justify-center">
           <div className="w-100 lg:w-[1200px] bg-amber-100 mx-4 mt-8 p-10 shadow-sm ">
             <div className="flex justify-center">
-              <h1 className="text-xl">{recipe && recipe.title}</h1>
+              <h1 className="text-xl">{recipe && recipe.description}</h1>
             </div>
 
             <div className="flex flex-col md:flex-row mt-8">
               <div className="flex flex-col justify-center md:justify-start md:flex-1">
                 <h1 className="font-bold">Ingredienser</h1>
-                <ul className="space-y-2 mt-2">
-                  <li>Minivan</li>
-                  <li>Toyota Expedition</li>
-                  <li>BMW Golf</li>
-                  <li>Hyundai Charger</li>
-                  <li>Maserati Spyder</li>
-                </ul>
+               <ul>
+                 {recipe?.ingredients.map((ingredient) => (
+                     <li key={ingredient.id}>{ingredient.title}</li>
+                 ))}
+               </ul>
               </div>
 
               <div className="flex flex-col md:flex-1 mt-8 md:mt-0">
