@@ -2406,21 +2406,21 @@ export type GetAllRecipesQuery = {
   allRecipes: Array<{
     __typename?: 'RecipeRecord'
     excerpt: string | null
-    id: any
+    id: string
     slug: string | null
-    updatedAt: any
+    updatedAt: string
     title: string | null
     featuredImage: { __typename?: 'FileField'; url: string } | null
     description: {
       __typename?: 'RecipeModelDescriptionField'
-      value: any
+      value: unknown
     } | null
     ingredients: Array<{
       __typename?: 'IngredientBlockRecord'
       title: string | null
       unit: string | null
-      quantity: any | null
-      id: any
+      quantity: number | null
+      id: string
     }>
   }>
 }
@@ -2435,17 +2435,17 @@ export type GetSingleRecipeQuery = {
     __typename?: 'RecipeRecord'
     title: string | null
     slug: string | null
-    updatedAt: any
-    id: any
+    updatedAt: string
+    id: string
     featuredImage: { __typename?: 'FileField'; url: string } | null
     description: {
       __typename?: 'RecipeModelDescriptionField'
-      value: any
+      value: unknown
     } | null
     ingredients: Array<{
       __typename?: 'IngredientBlockRecord'
-      id: any
-      quantity: any | null
+      id: string
+      quantity: number | null
       unit: string | null
       title: string | null
     }>

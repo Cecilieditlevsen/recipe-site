@@ -1,19 +1,20 @@
-import {Recipe, recipeIngredientSchema, recipeSchema} from '@services/datocms/validations/recipe'
+import { Recipe, recipeSchema } from '@services/datocms/validations/recipe'
 import { datocmsClient } from '@services/datocms/client'
-import {z} from 'zod'
+import { ingredientListSchema } from '@services/datocms/validations/ingredient'
 
-
-export async function getSingleRecipe(slug: {slug: string}): Promise<Recipe | undefined> {
+export async function getSingleRecipe(slug: {
+  slug: string
+}): Promise<Recipe | undefined> {
   const data = await datocmsClient.GetSingleRecipe(slug)
 
   try {
     const mappedRecipe: Recipe = {
       id: data.recipe?.id,
-      title: data.recipe?.title?? 'No title',
+      title: data.recipe?.title ?? 'No title',
       description: data.recipe?.slug ?? 'No description',
       slug: data.recipe?.slug ?? 'not found',
       image: data.recipe?.featuredImage?.url ?? 'no image',
-      ingredients: data.recipe?.ingredients.map((ingredient) => ({unit: '', title: '', quantity: 2, id: 1})) ?? [{title: '', quantity: 1, unit: '', id: 1}]
+      ingredients: ingredientListSchema.parse(data.recipe?.ingredients),
     }
 
     return recipeSchema.parse(mappedRecipe)

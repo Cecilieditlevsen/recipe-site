@@ -13,8 +13,20 @@ hooks:
 generates:
   src/services/datocms/generated.ts:
     plugins:
-      - 'typescript'
-      - 'typescript-operations'
+      - typescript
+      - typescript-operations:
+          strictScalars: true
+          scalars:
+            BooleanType: boolean
+            CustomData: Record<string, unknown>
+            Date: string
+            DateTime: string
+            FloatType: number
+            IntType: number
+            ItemId: string
+            JsonField: unknown
+            MetaTagAttributes: Record<string, string>
+            UploadId: string
       - 'typescript-graphql-request'
     config:
       avoidOptionals: true
